@@ -17,7 +17,7 @@ from adflow import ADFLOW
 from baseclasses import AeroProblem
 from openmdao.utils.assert_utils import assert_near_equal
 
-from mphys.multipoint import Multipoint
+from mphys import Multipoint
 from mphys.scenarios.aerodynamic import ScenarioAerodynamic
 
 baseDir = os.path.dirname(os.path.abspath(__file__))
@@ -160,7 +160,7 @@ class TestADFlow(unittest.TestCase):
         data = self.prob.check_totals(wrt="x_aero", step=1e-8)
         for var, err in data.items():
             rel_err = err["rel error"]
-            assert_near_equal(rel_err.forward, 0.0, 5e-3)
+            assert_near_equal(rel_err.reverse, 0.0, 5e-3)
 
 
 if __name__ == "__main__":
