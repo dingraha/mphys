@@ -26,7 +26,7 @@ from openmdao.utils.assert_utils import assert_near_equal
 # for geometric DVs
 from pygeo.mphys import OM_DVGEOCOMP
 
-from mphys.multipoint import Multipoint
+from mphys import Multipoint
 
 baseDir = os.path.dirname(os.path.abspath(__file__))
 
@@ -204,7 +204,7 @@ class TestDVCon(unittest.TestCase):
             rel_err = err[
                 "abs error"
             ]  # abs error used here because for some values should be zero so the ref err is undefined
-            assert_near_equal(rel_err.forward, 0.0, 1e-6)
+            assert_near_equal(rel_err.reverse, 0.0, 1e-6)
 
 
 if __name__ == "__main__":

@@ -20,7 +20,7 @@ from adflow import ADFLOW
 from openmdao.utils.assert_utils import assert_near_equal
 from pygeo.mphys import OM_DVGEOCOMP
 
-from mphys.multipoint import Multipoint
+from mphys import Multipoint
 
 # from mpi4py import MPI
 
@@ -161,11 +161,11 @@ class TestDVGeo(unittest.TestCase):
         self.prob.run_model()
         print("----------------strating check totals--------------")
         # data = self.prob.check_totals(step=1e-7, form="forward")
-        data = self.prob.check_totals(step=1e-7)  # out_stream=None
+        data = self.prob.check_totals(step=1e-7, compact_print=True)  # out_stream=None
         for var, err in data.items():
 
-            rel_err = err["rel error"]  # ,  'rel error']
-            assert_near_equal(rel_err.forward, 0.0, 1e-5)
+            abs_err = err["abs error"]  # ,  'rel error']
+            assert_near_equal(abs_err.reverse, 0.0, 5e-8)
 
 
 if __name__ == "__main__":
